@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:piknik/ui/pages/bonus_page.dart';
 import 'package:piknik/ui/pages/get_started_page.dart';
+import 'package:piknik/ui/pages/main_page.dart';
+import 'package:piknik/ui/pages/sign_up_page.dart';
 import 'package:piknik/ui/pages/splash_page.dart';
 
 void main() {
@@ -17,6 +20,9 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => SplashPage(),
         '/get-started': (context) => GetStarted(),
+        '/sign-up': (context) => SignUp(),
+        '/bonus': (context) => BonusPage(),
+        '/main': (context) => MainPage(),
       },
     );
   }
