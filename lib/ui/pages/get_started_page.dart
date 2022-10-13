@@ -16,7 +16,8 @@ class GetStarted extends StatelessWidget {
             width: double.infinity,
             height: double.infinity,
             decoration: BoxDecoration(
-                image: DecorationImage(image: AssetImage('assets/sunset.jpg'))),
+                image: DecorationImage(
+                    fit: BoxFit.cover, image: AssetImage('assets/sunset.jpg'))),
           ),
           Center(
             child: Column(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:piknik/shared/theme.dart';
+import 'package:piknik/ui/pages/detail_page.dart';
 
 class DestinationTile extends StatelessWidget {
   final String name;
@@ -15,57 +16,64 @@ class DestinationTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: 20),
-      padding: EdgeInsets.all(10),
-      width: double.infinity,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(defaultRadius),
-          color: whiteColor),
-      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-        Container(
-          width: 100,
-          height: 100,
-          margin: EdgeInsets.only(right: 20),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(defaultRadius),
-              image: DecorationImage(
-                  fit: BoxFit.cover, image: AssetImage(imageUrl))),
-        ),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                name,
-                style: blackTextStyle.copyWith(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w700,
-                    overflow: TextOverflow.ellipsis),
-              ),
-              Text(
-                city,
-                style: greyTextStyle.copyWith(overflow: TextOverflow.ellipsis),
-              ),
-            ],
+    return GestureDetector(
+      onTap: (() {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => DetailPage()));
+      }),
+      child: Container(
+        margin: EdgeInsets.only(top: 20),
+        padding: EdgeInsets.all(10),
+        width: double.infinity,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(defaultRadius),
+            color: whiteColor),
+        child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+          Container(
+            width: 100,
+            height: 100,
+            margin: EdgeInsets.only(right: 20),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(defaultRadius),
+                image: DecorationImage(
+                    fit: BoxFit.cover, image: AssetImage(imageUrl))),
           ),
-        ),
-        Row(
-          children: [
-            Icon(
-              Icons.star,
-              color: Colors.amber,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  name,
+                  style: blackTextStyle.copyWith(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w700,
+                      overflow: TextOverflow.ellipsis),
+                ),
+                Text(
+                  city,
+                  style:
+                      greyTextStyle.copyWith(overflow: TextOverflow.ellipsis),
+                ),
+              ],
             ),
-            SizedBox(
-              width: 5,
-            ),
-            Text(
-              rating,
-              style: blackTextStyle.copyWith(fontWeight: FontWeight.w700),
-            )
-          ],
-        )
-      ]),
+          ),
+          Row(
+            children: [
+              Icon(
+                Icons.star,
+                color: Colors.amber,
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Text(
+                rating,
+                style: blackTextStyle.copyWith(fontWeight: FontWeight.w700),
+              )
+            ],
+          )
+        ]),
+      ),
     );
   }
 }
