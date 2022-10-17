@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:piknik/core.dart';
+import 'package:piknik/ui/pages/choose_seat.dart';
+import 'package:piknik/ui/widgets/custom_button.dart';
+import 'package:piknik/ui/widgets/interest_item.dart';
+import 'package:piknik/ui/widgets/photos_item.dart';
 
 class DetailPage extends StatelessWidget {
   const DetailPage({super.key});
@@ -90,21 +94,20 @@ class DetailPage extends StatelessWidget {
 
     Widget detailCard() {
       return Container(
-        width: double.infinity,
-        height: 450,
-        margin: EdgeInsets.only(
-          top: 450,
-          left: 2 * defaultMargin,
-          right: 2 * defaultMargin,
-        ),
-        decoration: BoxDecoration(
-            color: whiteColor,
-            borderRadius: BorderRadius.circular(defaultRadius)),
-        child: Padding(
-          padding: EdgeInsets.all(defaultMargin),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+          width: double.infinity,
+          height: 450,
+          margin: EdgeInsets.only(
+            top: 450,
+            left: defaultMargin,
+            right: defaultMargin,
+          ),
+          decoration: BoxDecoration(
+              color: whiteColor,
+              borderRadius: BorderRadius.circular(defaultRadius)),
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: defaultMargin, vertical: defaultMargin),
+            child: ListView(children: [
               Text(
                 'About',
                 style: blackTextStyle.copyWith(
@@ -129,37 +132,15 @@ class DetailPage extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                          width: 70,
-                          height: 70,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage('assets/kuta.jpeg'),
-                                  fit: BoxFit.cover),
-                              borderRadius:
-                                  BorderRadius.circular(defaultRadius))),
-                      Container(
-                          width: 70,
-                          height: 70,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage('assets/nasionalpark.jpeg'),
-                                  fit: BoxFit.cover),
-                              borderRadius:
-                                  BorderRadius.circular(defaultRadius))),
-                      Container(
-                          width: 70,
-                          height: 70,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage('assets/waterboom.jpeg'),
-                                  fit: BoxFit.cover),
-                              borderRadius:
-                                  BorderRadius.circular(defaultRadius))),
-                    ],
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        PhotosItem(imageUrl: 'assets/kuta.jpeg'),
+                        PhotosItem(imageUrl: 'assets/nasionalpark.jpeg'),
+                        PhotosItem(imageUrl: 'assets/waterboom.jpeg'),
+                      ],
+                    ),
                   ),
                   SizedBox(
                     height: 20,
@@ -169,88 +150,68 @@ class DetailPage extends StatelessWidget {
                     style: blackTextStyle.copyWith(
                         fontSize: 17, fontWeight: FontWeight.w700),
                   ),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Row(
                     children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.task_alt,
-                            color: blackColor,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            'Kids Park',
-                            style: blackTextStyle.copyWith(
-                                fontSize: 16, fontWeight: FontWeight.w700),
-                          )
-                        ],
+                      InterestItem(
+                        item: 'Kids Park',
                       ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.task_alt,
-                            color: blackColor,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            'Honor Bridge',
-                            style: blackTextStyle.copyWith(
-                                fontSize: 16, fontWeight: FontWeight.w700),
-                          )
-                        ],
-                      ),
+                      InterestItem(
+                        item: 'City Museum',
+                      )
                     ],
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.task_alt,
-                            color: blackColor,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            'City Museum',
-                            style: blackTextStyle.copyWith(
-                                fontSize: 16, fontWeight: FontWeight.w700),
-                          )
-                        ],
+                      InterestItem(
+                        item: 'Honor Bridge',
                       ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.task_alt,
-                            color: blackColor,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            'Central Mall',
-                            style: blackTextStyle.copyWith(
-                                fontSize: 16, fontWeight: FontWeight.w700),
-                          )
-                        ],
-                      ),
+                      InterestItem(
+                        item: 'Central Mall',
+                      )
                     ],
                   )
                 ],
-              )
-            ],
-          ),
-        ),
-      );
+              ),
+              Container(
+                  width: double.infinity,
+                  margin: EdgeInsets.only(top: 30),
+                  child: Row(children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'IDR 2.500.000',
+                            style: blackTextStyle.copyWith(
+                                fontWeight: FontWeight.w700, fontSize: 15),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            'per orang',
+                            style: greyTextStyle.copyWith(
+                                fontSize: 15, fontWeight: FontWeight.w300),
+                          )
+                        ],
+                      ),
+                    ),
+                    CustomButton(
+                      title: 'Pesan Sekarang',
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ChooseSeat()));
+                      },
+                      width: 170,
+                    ),
+                  ])),
+            ]),
+          ));
     }
 
     return Scaffold(

@@ -1,11 +1,16 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:piknik/shared/theme.dart';
 import 'package:piknik/ui/pages/bonus_page.dart';
 import 'package:piknik/ui/widgets/custom_button.dart';
 import 'package:piknik/ui/widgets/custom_form_input.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SignUp extends StatelessWidget {
-  const SignUp({super.key});
+  final Uri _url =
+      Uri.parse('https://masendhy.gitbook.io/syarat-dan-ketentuan/');
+
+  SignUp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -199,10 +204,20 @@ class SignUp extends StatelessWidget {
       return Container(
         alignment: Alignment.center,
         margin: EdgeInsets.only(top: 50, bottom: 75),
-        child: Text(
-          'Term and Conditions',
-          style: greyTextStyle.copyWith(
-              fontSize: 16, decoration: TextDecoration.underline),
+        child: RichText(
+          text: TextSpan(
+            text: 'Syarat dan Ketentuan',
+            recognizer: TapGestureRecognizer()
+              ..onTap = () async {
+                if (await canLaunchUrl(_url)) {
+                  await launchUrl(_url);
+                } else {
+                  throw 'Cannot load Url';
+                }
+              },
+            style: greyTextStyle.copyWith(
+                fontSize: 16, decoration: TextDecoration.underline),
+          ),
         ),
       );
     }
